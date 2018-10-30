@@ -1,5 +1,8 @@
-* [1. Two Sum 【easy】](#1-two-sum-【easy】)
-* [2. Add Two Numbers【medium】](#2-add-two-numbers【medium】)
+* [Two Sum 【easy】](#1-two-sum-【easy】)
+* [Add Two Numbers【medium】](#2-add-two-numbers【medium】)
+* [Longest Substring Without Repeating Characters【medium】](#3-longest-substring-without-repeating-characters【medium】)
+* [Median of Two Sorted Arrays【hard】](#4-median-of-two-sorted-arrays【hard】)
+* [Longest Palindromic Substring【medium】](#5-longest-palindromic-substring【medium】)
 
 ## 
 
