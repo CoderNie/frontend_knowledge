@@ -2,6 +2,7 @@
 <div align="center">
     <img src="assets/pics/main.png" width="150px">
     <br>
+    <p style="font-weight:800;color: #795548;text-shadow: 1px 0px 1px;font-size: 25px;" >FRONTEND KNOWLEDGE</p>
 </div>
 
 #### 算法
