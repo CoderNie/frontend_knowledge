@@ -11,7 +11,7 @@
 
 #### Javascript
 
-* [Javascript重要概念]（待更新）
+* Javascript重要概念（待更新）
 
     解释原型链，闭包，事件循环等重要概念
 
