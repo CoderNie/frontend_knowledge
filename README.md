@@ -17,7 +17,7 @@
 #### 算法
 
 * [剑指offer 题解]（待更新）
-* [Leetcode 题解]（待更新）
+* [Leetcode 题解](leetcode题解.md)
 
 #### Javascript
 
