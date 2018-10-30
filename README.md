@@ -2,7 +2,7 @@
     <img src="assets/pics/main.png" width="150px">
     <br>
 
-    #### FRONTEND KNOWLEDGE
+#### FRONTEND KNOWLEDGE
 
 </div>
 
