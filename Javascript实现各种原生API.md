@@ -92,7 +92,7 @@ function divNew() {
 
 实现思路：
 
-a. 基于原型链，沿着原型链寻找，所以迭代条件是 L = L.\_\_proto\_\_
+a. 基于原型链，沿着原型链寻找，所以迭代条件是 L = L.
 
 b. 空对象的原型的原型指向 null，所以终止条件是 L === null
 
@@ -116,15 +116,13 @@ function instanceOf(L, R) {
 
 ### 7. throttle 函数节流
 
-
-
 ### 8. debounce 函数防抖
-
-
 
 ### 9. Array.isArray
 
 实现思路：
+
+a.
 
 ```
 Array.prototype.divIsArray(){
