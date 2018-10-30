@@ -1,3 +1,4 @@
+<!--lang: javascript-->
 ## Javascript实现各种API
 
 * [call](#1-call)
