@@ -1,8 +1,11 @@
 <div align="center">
     <img src="assets/pics/main.png" width="150px">
     <br>
-    <p style="font-weight:800;color:#795548;text-shadow: 1px 0px 1px;font-size:25px;">FRONTEND KNOWLEDGE</p>
+####FRONTEND KNOWLEDGE
 </div>
+
+[![GitHub license](https://img.shields.io/github/license/CoderNie/frontend_knowledge.svg)](https://github.com/CoderNie/frontend_knowledge/blob/master/LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/CoderNie/frontend_knowledge.svg)](https://github.com/CoderNie/frontend_knowledge/stargazers)
+
 
 #### 算法
 
