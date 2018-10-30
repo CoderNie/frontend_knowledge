@@ -1,9 +1,8 @@
 ## Javascript实现各种API
 
-[1. apply](#1-apply)
-
-[2. bind](#2-bind)
-
+1. [apply](#1-apply)
+2. [bind](#2-bind)
+3. 
 [3. new](#3-new)
 
 [4. instanceof](#4-instanceof)
@@ -37,14 +36,6 @@
 ### 8. debounce 函数防抖
 
 ### 9. Array.isArray
-
-
-
-
-
-
-
-
 
 ### 
 
