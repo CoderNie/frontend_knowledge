@@ -4,7 +4,7 @@
 * [bind](#2-bind)
 * [new](#3-new)
 * [instanceof](#4-instanceof)
-* [JSON.parse](#5-jsonparse)
+* [Object.assign](#5-jsonparse)
 * [JSON.stringify](#6-jsonstringify)
 * [throttle 函数节流](#7-throttle-函数节流)
 * [debounce 函数防抖](#8-debounce-函数防抖)
@@ -118,9 +118,55 @@ function instanceOf(L, R) {
 }
 ```
 
-## 5. JSON.parse
+## 5. Object.assign
 
 ## 6. JSON.stringify
+
+函数作用：将对象转换成一个 json 格式的字符串保存起来
+
+实现思路：
+
+a. 因为对象中可能还包括子对象，所以递归地 stringify 对象
+
+b. 根据对象是否是数组，分情况格式化
+
+c. 为满足边界条件，根据变量类型返回相应的值
+
+```js
+function jsonStringify(obj) {
+    if (obj === undefined || typeof obj === 'symbol') {
+        return undefined
+    } else if (typeof obj === 'string') {
+        return '\"' + obj + '\"'
+    } else if (typeof obj !== 'object' || obj === null) {
+        return obj + ''
+    } else {
+        var isObjArray = Array.isArray(obj)
+        var res = ''
+        var func = arguments.callee
+        if (isObjArray) {
+            res += '['
+            obj.forEach(function (item) {
+                var shouldBeNull = (item === undefined || item === null || typeof item === 'symbol')
+                res += (shouldBeNull ? 'null' : func(item)) + ','
+            })
+            if (res[res.length - 1] === ',')
+                res = res.substring(0, res.length - 1)
+            res += ']'
+        } else {
+            res += '{'
+            for (var key in obj) {
+                if (typeof obj[key] !== 'symbol' && obj[key] !== undefined)
+                    res += '\"' + key + '\":' + func(obj[key]) + ','
+            }
+            if (res[res.length - 1] === ',')
+                res = res.substring(0, res.length - 1)
+            res += '}'
+        }
+        return res
+    }
+}
+```
 
 ## 7. throttle 函数节流
 
