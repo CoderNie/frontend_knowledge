@@ -5,15 +5,19 @@
 </div>
 
 #### 算法
+
 * [剑指offer 题解]（待更新）
 * [Leetcode 题解]（待更新）
 
 #### Javascript
+
 * [Javascript重要概念]（待更新）
-解释原型链，闭包，事件循环等重要概念
+
+    解释原型链，闭包，事件循环等重要概念
 
 * [Javascript实现各种API](Javascript实现各种API.md)
-实现bind，new，JSON.stringify，节流，防抖等API
+
+    实现bind，new，JSON.stringify，节流，防抖等API
 
 #### React（待更新）
 
