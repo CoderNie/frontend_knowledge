@@ -1,16 +1,15 @@
-# 
 <div align="center">
     <img src="assets/pics/main.png" width="150px">
     <br>
-    <p style="font-weight:800;color: #795548;text-shadow: 1px 0px 1px;font-size: 25px;" >FRONTEND KNOWLEDGE</p>
+    <p style="font-weight:800;color:#795548;text-shadow: 1px 0px 1px;font-size:25px;">FRONTEND KNOWLEDGE</p>
 </div>
 
 #### 算法
-* [剑指offer 题解]()
-* [Leetcode 题解]()
+* [剑指offer 题解]（待更新）
+* [Leetcode 题解]（待更新）
 
 #### Javascript
-* [Javascript重要概念]()
+* [Javascript重要概念]（待更新）
 解释原型链，闭包，事件循环等重要概念
 
 * [Javascript实现各种API](Javascript实现各种API.md)
