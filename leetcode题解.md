@@ -1,4 +1,4 @@
-* [Two Sum 【easy】](#1-two-sum)
+* [1. Two Sum](#1-two-sum)
 * [Add Two Numbers【medium】](#2-add-two-number-medium)
 * [Longest Substring Without Repeating Characters【medium】](#3-longest-substring-without-repeating-characters-medium)
 * [Median of Two Sorted Arrays](#4-median-of-two-sorted-arrays)
