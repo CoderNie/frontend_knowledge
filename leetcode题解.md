@@ -1,20 +1,16 @@
 * [1. Two Sum](#1-two-sum)
-* [Add Two Numbers【medium】](#2-add-two-number-medium)
-* [Longest Substring Without Repeating Characters【medium】](#3-longest-substring-without-repeating-characters-medium)
-* [Median of Two Sorted Arrays](#4-median-of-two-sorted-arrays)
-* [Longest Palindromic Substring](#5-longest-palindromic-substring)
-
+* * * * 
 ## 
 
 ## 1. Two Sum
 
-##### 解题思路：
+#### 解题思路：
 
-##### 暴力解法O\(N^2\)：
+#### 暴力解法O\(N^2\)：
 
 嵌套两层循环：第一层：i 从 0 到 n - 2；第二层：j 从 i + 1 到 n - 1；判断 nums\[i\] + nums\[j\] == target ，如果成立则是正确答案
 
-##### map解法O\(N\*logN\)：
+#### map解法O\(N\*logN\)：
 
 从 0 到 n - 1 依次遍历，利用map存放**每一个数值的下标**，在map中寻找是否有使（nums\[i\] + x == target）成立的x的存在，如果存在则返回i和它的下标（即myMap\[ target - nums\[i\] \]\)。
 
@@ -41,13 +37,13 @@ vector<int> twoSum(vector<int>& nums, int target) {
 
 ## 2. Add Two Numbers【medium】
 
-##### 解题思路：
+#### 解题思路：
 
 从左到右遍历链表，依次相加，每一个位置生成一个新的结点即可。
 
 时间复杂度：O\( max\( len\(l1\), len\(l2\) \) \)
 
-##### 考虑边界条件：
+#### 考虑边界条件：
 
 1.进位的的处理：carry表示进位，当最后一位还有进位时，即使 l1 和 l2 均为NULL的情况下，还需要生成一个新的结点，所以while的条件中加入了 carry != 0 判断项。
 
@@ -88,13 +84,13 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 
 ## 3. Longest Substring Without Repeating Characters【medium】
 
-##### 解题思路：
+#### 解题思路：
 
-##### 暴力解法  O\(N^3\)：
+#### 暴力解法  O\(N^3\)：
 
 从每个点遍历、依次遍历这个点后的每一个点、通过遍历该点之前的点判断该点是否出现过。听上去有点拗口，代码在下方，这个暴力方法Leetcode也可以AC，但是不推荐使用。
 
-##### 头尾标记法 O\(N\*logN\)：
+#### 头尾标记法 O\(N\*logN\)：
 
 头标记指向当前最长无重复字符串的头部，尾标记指向其尾部。**通过一个 map 来记录出现过的字符最后出现的位置。**
 
@@ -144,15 +140,15 @@ int lengthOfLongestSubstring(string s) {
 
 ## 4. Median of Two Sorted Arrays【hard】
 
-##### 解题思路：
+#### 解题思路：
 
 这道题咋一看像二分查找，但是仔细看题，发现有两个有序数组，而且不是让我们找一个特定的数，而是要找两个数组合并后的中位数，这样一看就比较难了，也难怪归类为hard类别。这道题除了一下介绍的二分查找法，还有两个数组分别进行二分查找的方法，不过代码量相对更多\(也可能是因为笔者水平不够导致代码量过大\)，而且看了下面的二分查找法后，感叹于该算法作者的脑洞，所以在这里只介绍该种方法。
 
-##### 暴力方法 O\(\(m + n\)\*log\(m + n\)\)：
+#### 暴力方法 O\(\(m + n\)\*log\(m + n\)\)：
 
 将两个数组合并，然后进行快排，中间的数即中位数。由于题目说了复杂度不能超过O\(log\(m + n\)\)，所以这个方法当然回Time Limit Excess，所以我们得探究一种更高效的解法。
 
-二分查找法 O\(log\(min\(m, n\)\)\)：
+#### 二分查找法 O\(log\(min\(m, n\)\)\)：
 
 首先分别把两个数组分成两边，大概为下面这种形式：\(A表示nums1， B表示nums2\)
 
@@ -189,7 +185,7 @@ int lengthOfLongestSubstring(string s) {
 
 那我们如何缩小和扩大我们的 i 呢，那就是采用二分查找的方式啦，首先将 i 置为数组A的中间下标，如果需要增大，则把其设为上半区的中间下标，反之则设为下半区的中间下标，所以这种搜索方式的时间复杂度和二分查找的时间复杂度一样，为了使时间复杂度尽量的小，我们使A成为长度更小的那个数组，如果初始A比B长，我们则交换它们的位置。
 
-##### 考虑边界条件：
+#### 考虑边界条件：
 
 1.如果不存在满足条件二的情况会怎么样呢？也就是 i 走到了数组A的尽头，依旧没法满足条件二，这个时候我们不难知道如果 i 走到数组A的最左端，那么它一定是在不断地经历情况4，而这时 A\[0\] &gt; B\[j\]，那么我们不难知道这时left\_part的最大值就是B\[j - 1\]；反之我们也可以推出 i 到了A的最右端、j 到了B的最左端或者最右端的情况。
 
