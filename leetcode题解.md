@@ -1,6 +1,10 @@
 * [1. Two Sum](#1-two-sum)
+* [2. Add Two Numbers](#2-add-two-numbers)
+* [3. Longest Substring Without Repeating Characters](#3-longest-substring-without-repeating-characters)
+* [4. Median of Two Sorted Arrays](#4-median-of-two-sorted-arrays)
+* [5. Longest Palindromic Substring](#5-longest-palindromic-substring)
 
-* * * * ## 
+### 
 
 ### 1. Two Sum
 
@@ -536,7 +540,6 @@ bool isMatch(string s, string p) {
 }
 ```
 
-
 ## 11. Container With Most Water
 
 #### 解题思路：
@@ -677,7 +680,7 @@ int romanToInt (string s) {
 
 这道题从头到尾每一个字符遍历，如果出现不同或者已经不够长，则把已知的共同前缀返回即可。
 
-**考虑边界条件：**
+**考虑边界条件：**  
 当输入字符串数组为空时，返回空字符串""。
 
 实现代码：
@@ -964,7 +967,6 @@ bool isValid(string s) {
 }
 ```
 
-
 ## 21. Merge Two Sorted Lists
 
 #### 解题思路：
@@ -1064,7 +1066,6 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
 }
 ```
 
-
 ## 24. Swap Nodes in Pairs
 
 #### 解题思路：
@@ -1089,8 +1090,6 @@ ListNode* swapPairs(ListNode* head) {
   return dump->next; 
 }
 ```
-
-
 
 ## 25. Reverse Nodes in k-Group
 
@@ -1141,8 +1140,6 @@ ListNode* reverseKGroup(ListNode* head, int k) {
 }
 ```
 
-
-
 ## 26. Remove Duplicates from Sorted Array
 
 #### 解题思路：
@@ -1164,8 +1161,6 @@ int removeDuplicates(vector<int>& nums) {
   return j;      
 }
 ```
-
-
 
 ## 27. Remove Element
 
@@ -1284,3 +1279,6 @@ vector<int> findSubstring(string s, vector<string>& words) {
   return result;
 }
 ```
+
+
+
