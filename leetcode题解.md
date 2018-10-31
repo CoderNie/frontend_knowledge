@@ -2,7 +2,7 @@
 
 * * * * ## 
 
-## 1. Two Sum
+### 1. Two Sum
 
 #### 解题思路：
 
@@ -35,7 +35,7 @@ vector<int> twoSum(vector<int>& nums, int target) {
 }
 ```
 
-## 2. Add Two Numbers【medium】
+### 2. Add Two Numbers
 
 #### 解题思路：
 
@@ -82,7 +82,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 }
 ```
 
-## 3. Longest Substring Without Repeating Characters【medium】
+## 3. Longest Substring Without Repeating Characters
 
 #### 解题思路：
 
@@ -138,7 +138,7 @@ int lengthOfLongestSubstring(string s) {
 }
 ```
 
-## 4. Median of Two Sorted Arrays【hard】
+## 4. Median of Two Sorted Arrays
 
 #### 解题思路：
 
@@ -255,9 +255,9 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 }
 ```
 
-## 5. Longest Palindromic Substring【medium】
+## 5. Longest Palindromic Substring
 
-##### 解题思路：
+#### 解题思路：
 
 ##### 暴力解法 O\(N^3\)：
 
@@ -315,9 +315,9 @@ string longestPalindrome(string s) {
 }
 ```
 
-## 6. ZigZag Conversion【medium】
+## 6. ZigZag Conversion
 
-##### 解题思路：
+#### 解题思路：
 
 这道题倒没有特别的方法，就按照题目意思来模拟 Z 字形即可，用一个字符串数组来存放每一行的字符串，最后进行拼接即可。
 
@@ -355,9 +355,9 @@ string convert(string s, int numRows) {
 }
 ```
 
-## 7. Reverse Integer【easy】
+## 7. Reverse Integer
 
-##### 解题思路：
+#### 解题思路：
 
 挨个遍历，不断把末位数赋给新的值即可。
 
@@ -384,9 +384,9 @@ int reverse(int x) {
 }
 ```
 
-## 8. String to Integer \(atoi\)【medium】
+## 8. String to Integer \(atoi\)
 
-##### 解题思路：
+#### 解题思路：
 
 遍历字符串然后进行分情况讨论：（ isInit 表示数字是否已经开始，通过 isInit 的值判断是否为开头，如果为 true 表示不是开头）
 
@@ -438,9 +438,9 @@ int myAtoi(string str) {
 }
 ```
 
-## 9. Palindrome Number【medium】
+## 9. Palindrome Number
 
-##### 解题思路：
+#### 解题思路：
 
 利用第七题的代码，将数字反转，判断与原数字是否相等即可，这里考虑到负数全部都不是回文数字，所以直接返回false。
 
@@ -470,9 +470,9 @@ bool isPalindrome(int x) {
 }
 ```
 
-## 10. Regular Expression Matching【hard】
+### 10. Regular Expression Matching
 
-##### 解题思路：
+#### 解题思路：
 
 ##### 动态规划：
 
@@ -537,4 +537,750 @@ bool isMatch(string s, string p) {
 ```
 
 
+## 11. Container With Most Water
 
+#### 解题思路：
+
+这道题可以考虑暴力枚举的方式，复杂度应该是O\(N^2\)，嵌套循环即可实现，下面重点讲复杂度只有O\(N\)的**头尾标记法**。
+
+考虑到：
+
+**容器的容量 = 两端中较矮的板子长度（L） \* 两端的距离（d）**
+
+在数组两端设置头尾标记，以头尾标记为容器的两端，假设头标记对应的板子长度比较短，那么现在 容器的容量 = 头标记板子 \* 头尾标记的距离。那么以头标记为一端的所有容器的容量必然小于当前容器，因为其他以头标记为一端的容器的**L**一定小于或等于当前容器，而距离**d**一定小于当前容器。所以这些容器都可以无需遍历，因此让头标记向尾部移动一个单位；假设尾标记对应的板子长度比较短，则以此类推，让尾标记向头部移动一个单位，直至头尾标记相遇则停止寻找。
+
+实现代码：
+
+```javascript
+// 11. Container With Most Water
+int maxArea(vector<int>& height) {
+  int res = 0, i = 0, j = height.size() - 1;
+  while (i != j) {
+    res = max(res, (j - i) * min(height[i], height[j]));
+    if (height[i] > height[j]) {
+      j--;
+    } else {
+      i++;
+    }
+  }
+  return res;
+}
+```
+
+## 12. Integer To Roman
+
+#### 解题思路：
+
+这道题没有特别多技巧，直接按照转换规则进行转换即可，对每一位进行遍历，注意考虑4和9的特殊情况即可。
+
+在查看Leetcode讨论区的时候还看到了一种脑洞大开的“全部映射法”，这里贴上来给大家欣赏一下，也开拓了一下思路，这种方法告诉我们在情况不多的时候，可以考虑一下这种思路，代码更为简洁。
+
+实现代码：
+
+```javascript
+// 12. Integer to Roman
+string intToRoman(int num) {
+  map<int, char> romanMap;
+  romanMap[1] = 'I';
+  romanMap[5] = 'V';
+  romanMap[10] = 'X';
+  romanMap[50] = 'L';
+  romanMap[100] = 'C';
+  romanMap[500] = 'D';
+  romanMap[1000] = 'M';
+  string res;
+  for (int i = 3; i >= 0; i--) {
+    int fold = pow(10, i);
+    if (num / fold == 9) {
+      res += romanMap[fold];
+      res += romanMap[fold * 10];
+    } else if (num / fold == 4) {
+      res += romanMap[fold];
+      res += romanMap[fold * 5];
+    } else if (num / fold > 0) {
+      if (num / fold >= 5) {
+        res += romanMap[fold * 5];
+        num -= 5 * fold;
+      }
+      for (int i = 0; i < num / fold; i++) {
+        res += romanMap[fold];
+      }
+    }
+    num %= fold;
+  }
+  return res;
+}
+// 脑洞大开的全部映射法
+string intToRoman(int num) {
+  string M[] = {"", "M", "MM", "MMM"};
+  string C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+  string X[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+  string I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+  return M[num/1000] + C[(num%1000)/100] + X[(num%100)/10] + I[num%10];
+}
+```
+
+## 13. Roman To Integer
+
+#### 解题思路：
+
+这道题和上一题一样，直接按照转换规则进行转换即可，对每一位进行遍历，注意考虑4和9的特殊情况即可。
+
+实现代码：
+
+```javascript
+// 13. Roman To Integer
+int romanToInt (string s) {
+  int res = 0;
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] == 'I') {
+      res += 1;
+    } else if (s[i] == 'V') {
+      res += 5;
+      if (i - 1 >= 0 && s[i - 1] == 'I') {
+        res -= 2;
+      }
+    } else if (s[i] == 'X') {
+      res += 10;
+      if (i - 1 >= 0 && s[i - 1] == 'I') {
+        res -= 2;
+      }
+    } else if (s[i] == 'L') {
+      res += 50;
+      if (i - 1 >= 0 && s[i - 1] == 'X') {
+        res -= 20;
+      }
+    } else if (s[i] == 'C') {
+      res += 100;
+      if (i - 1 >= 0 && s[i - 1] == 'X') {
+        res -= 20;
+      }
+    } else if (s[i] == 'D') {
+      res += 500;
+      if (i - 1 >= 0 && s[i - 1] == 'C') {
+        res -= 200;
+      }
+    } else if (s[i] == 'M') {
+      res += 1000;
+      if (i - 1 >= 0 && s[i - 1] == 'C') {
+        res -= 200;
+      }
+    }
+  }
+  return res;
+}
+```
+
+## 14. Longest Common Prefix
+
+#### 解题思路：
+
+这道题从头到尾每一个字符遍历，如果出现不同或者已经不够长，则把已知的共同前缀返回即可。
+
+**考虑边界条件：**
+当输入字符串数组为空时，返回空字符串""。
+
+实现代码：
+
+```javascript
+// 14. Longest Common Prefix
+string longestCommonPrefix(vector<string>& strs) {
+  if (strs.size() == 0) return "";
+  int length = 0;
+  while (true) {
+    if (strs[0].size() < length + 1) break;
+    for (int i = 0; i < strs.size() - 1; i++)
+      if (strs[i + 1].size() < length + 1 || strs[i][length] != strs[i + 1][length])
+        return strs[0].substr(0, length);
+    length++;
+  }
+  return strs[0].substr(0, length);
+}
+```
+
+## 15. 3Sum
+
+#### 解题思路：
+
+**双指针法**枚举，复杂度O\(N^2\)。
+
+首先，对数组进行排序。然后，从第一个数字 i 开始遍历，每一层遍历中有两个指针 p, q 分别指向该数字后续的数组中的头尾两端，通过判断这三个数组的和与0的关系，移动头尾指针：
+
+**如果和大于0，尾指针前移；如果和小于0，头指针后移；如果和等于0，分别移动头尾指针。**
+
+这里注意要考虑到数组中处理出现重复数字的情况。
+
+**如果 i 与 i - 1重复则直接跳过该项的遍历，如果 p 重复则 p++，如果 q 重复则 q++。**
+
+**考虑边界条件：**
+
+当输入数组长度不足3时，返回空字符串数组。
+
+实现代码：
+
+```javascript
+// 15. 3Sum
+vector<vector<int> > threeSum(vector<int>& nums) {
+  vector<vector<int> > res;
+  if (nums.size() < 3) return res;
+  sort(nums.begin(), nums.end());
+  int p, q, sum;
+  for (int i = 0; i < nums.size() - 2; i++) {
+    if (nums[i] > 0) 
+      break;
+    else if (i > 0 && nums[i] == nums[i - 1]) 
+      continue;
+    p = i + 1;
+    q = nums.size() - 1;
+    while (p < q) {
+      sum = nums[i] + nums[p] + nums[q];
+      if (sum == 0) {
+        res.push_back({nums[i], nums[p], nums[q]});
+        while (nums[p] == nums[p + 1] && p < q)
+          p++;
+        p++;
+        while (nums[q] == nums[q - 1] && p < q)
+          q--;
+        q--;
+      } else if (sum > 0) {
+        while (nums[q] == nums[q - 1] && p < q)
+          q--;
+        q--;
+      } else {
+        while (nums[p] == nums[p + 1] && p < q)
+          p++;
+        p++;
+      }
+    }
+  }
+  return res;
+}
+```
+
+## 16. 3Sum Closest
+
+#### 解题思路：
+
+与15题如出一辙，采用双指针法枚举，复杂度O\(N^2\)。
+
+首先，对数组进行排序。然后，从第一个数字 i 开始遍历，每一层遍历中有两个指针 p, q 分别指向该数字后续的数组中的头尾两端，通过判断这三个数组的和与0的关系，移动头尾指针：
+
+**如果和大于0，返回target；如果和小于0，头指针后移；如果和等于0，分别移动头尾指针。**
+
+这里注意要考虑到数组中处理出现重复数字的情况。
+
+**如果 i 与 i - 1重复则直接跳过该项的遍历，如果 p 重复则 p++，如果 q 重复则 q++。**
+
+实现代码：
+
+```javascript
+// 16. 3Sum Closest
+int threeSumClosest(vector<int>& nums, int target) {
+  sort(nums.begin(), nums.end());
+  int p, q, sum;
+  int gap = INT_MAX;
+  int res;
+  for (int i = 0; i < nums.size() - 2; i++) {
+    if (i > 0 && nums[i] == nums[i - 1]) continue;
+    p = i + 1;
+    q = nums.size() - 1;
+    while (p < q) {
+      sum = nums[i] + nums[p] + nums[q];
+      if (sum == target) {
+        return target;
+      } else if (sum > target) {
+        if (sum - target < gap) {
+          gap = sum - target;
+          res = sum;
+        }
+        while (nums[q] == nums[q - 1] && p < q)
+          q--;
+        q--;
+      } else {
+        if (target - sum < gap) {
+          gap = target - sum;
+          res = sum;
+        }
+        while (nums[p] == nums[p + 1] && p < q)
+          p++;
+        p++;
+      }
+    }
+  }
+  return res;
+}
+```
+
+## 17. Letter Combinations of a Phone Numbe
+
+#### 解题思路：
+
+经典的排列问题，直接用回溯法解决。
+
+下面的解法是使用循环实现非递归的回溯法。linshi作为中间变量，每一个数字按下之后的结果。
+
+实现代码：
+
+```javascript
+// 17. Letter Combinations of a Phone Number
+vector<string> letterCombinations(string digits) {
+  if (digits.size() == 0) return {};
+  map<int, string> digitalMap;
+  digitalMap[2] = "abc";
+  digitalMap[3] = "def";
+  digitalMap[4] = "ghi";
+  digitalMap[5] = "jkl";
+  digitalMap[6] = "mno";
+  digitalMap[7] = "pqrs";
+  digitalMap[8] = "tuv";
+  digitalMap[9] = "wxyz";
+  vector<string> linshi;
+  vector<string> res = {""};
+  for (int i = 0; i < digits.size(); i++) {
+    string tails = digitalMap[digits[i] - 48];
+    for (int j = 0; j < res.size(); j++) {
+      for (int n = 0; n < tails.size(); n++) {
+        linshi.push_back(res[j] + tails[n]);
+      }
+    }
+    res = linshi;
+    linshi = {};
+  }
+  return res;
+}
+```
+
+## 18. 4Sum
+
+#### 解题思路：
+
+和15题3Sum如出一辙，在3Sum的解法外面再套一层即可。
+
+实现代码：
+
+```javascript
+// 18. 4Sum 
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+      vector<vector<int> > res;
+  if (nums.size() < 4) return res;
+  sort(nums.begin(), nums.end());
+  int p, q, sum;
+  for (int j = 0; j < nums.size() - 3; j++) {
+    if (j > 0 && nums[j] == nums[j - 1])
+      continue;
+    int target3 = target - nums[j];  
+    for (int i = j + 1; i < nums.size() - 2; i++) {
+      if (i > j + 1 && nums[i] == nums[i - 1]) 
+        continue;
+      p = i + 1;
+      q = nums.size() - 1;
+      while (p < q) {
+        sum = nums[i] + nums[p] + nums[q];
+        if (sum == target3) {
+          res.push_back({nums[j], nums[i], nums[p], nums[q]});
+          while (nums[p] == nums[p + 1] && p < q)
+            p++;
+          p++;
+          while (nums[q] == nums[q - 1] && p < q)
+            q--;
+          q--;
+        } else if (sum > target3) {
+          while (nums[q] == nums[q - 1] && p < q)
+            q--;
+          q--;
+        } else {
+          while (nums[p] == nums[p + 1] && p < q)
+            p++;
+          p++;
+        }
+      }
+    }
+  }
+  return res;
+}
+```
+
+## 19. Remove Nth Node From End of List
+
+#### 解题思路：
+
+**快慢指针思想**，让两个指针 p, q都指向头结点，p 先向后移动 n + 1 步，然后p, q一起向后移动，当 p 到达尾结点时，q指向目标节点的前驱结点，做删除操作，然后按照题目要求返回头结点即可。
+
+实现代码：
+
+```javascript
+// 20. Valid Parentheses
+bool isValid(string s) {
+  stack<char> brackets;
+  map<char, char> bracketMap;
+  bracketMap[')'] = '(';
+  bracketMap[']'] = '[';
+  bracketMap['}'] = '{';
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+      brackets.push(s[i]);
+    } else if (s[i] == ')' || s[i] == ']' || s[i] == '}') {
+      if (!brackets.empty() && brackets.top() == bracketMap[s[i]]) {
+        brackets.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  if (brackets.empty()) return true;
+  else return false;
+}
+```
+
+## 20. Valid Parentheses
+
+#### 解题思路：
+
+**栈思想**，从左往右遍历，如果是左括号则入栈，右括号则出栈，最后判断栈是否为空，空则为有效括号组，否则无效。
+
+实现代码：
+
+```javascript
+// 20. Valid Parentheses
+bool isValid(string s) {
+  stack<char> brackets;
+  map<char, char> bracketMap;
+  bracketMap[')'] = '(';
+  bracketMap[']'] = '[';
+  bracketMap['}'] = '{';
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+      brackets.push(s[i]);
+    } else if (s[i] == ')' || s[i] == ']' || s[i] == '}') {
+      if (!brackets.empty() && brackets.top() == bracketMap[s[i]]) {
+        brackets.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  if (brackets.empty()) return true;
+  else return false;
+}
+```
+
+
+## 21. Merge Two Sorted Lists
+
+#### 解题思路：
+
+从头至尾一起遍历，每次比较头结点的大小，先添加小的结点，直到某一个链表为空为止，最后再将另一个还不为空的链表添加到末尾即可。
+
+实现代码：
+
+```javascript
+// 21. Merge Two Sorted Lists
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+  ListNode* head = new ListNode(0);
+  ListNode* p = head;
+  while (l1 != NULL && l2 != NULL) {
+    if (l1->val < l2 ->val) {
+      p->next = l1;
+      l1 = l1->next;
+    } else {
+      p->next = l2;
+      l2 = l2->next;
+    }
+    p = p->next;
+  }
+  if (l1 != NULL) {
+    p->next = l1;
+  } else if (l2 != NULL) {
+    p->next = l2;
+  }
+  return head->next;
+}
+```
+
+## 22. Generate Parentheses
+
+#### 解题思路：
+
+**回溯法**，用一个数组记录【当前字符串，左括号数量，右括号数量】，做 2n 次循环，每次循环遍历当前数组，对左括号不足 n 的添加左括号，右括号不足左括号的添加右括号（确保parentheses是有效的）
+
+实现代码：
+
+```javascript
+// 22. Generate Parentheses O(2^N)
+vector<string> generateParenthesis(int n) {
+  if (n == 0) return {};
+  // nowString, leftCount, rightCount
+  vector<pair<string, pair<int, int> > > res = {{"", {0, 0}}};
+  vector<pair<string, pair<int, int> > > linshi;
+  for (int i = 0; i < 2 * n; i++) {
+    for (int j = 0; j < res.size(); j++) {
+      string oldString = res[j].first;
+      if (res[j].second.first < n) {
+        linshi.push_back({oldString + '(', {res[j].second.first + 1, res[j].second.second}});
+      }
+      if (res[j].second.first > res[j].second.second) {
+        linshi.push_back({oldString + ')', {res[j].second.first, res[j].second.second + 1}});
+      }
+    }
+    res = linshi;
+    linshi = {};
+  }
+  vector<string> result;
+  for (int i = 0; i < res.size(); i++) {
+    result.push_back(res[i].first);
+  }
+  return result;
+}
+```
+
+## 23. Merge k Sorted Lists
+
+#### 解题思路：
+
+考虑使用**优先队列**，这道题相当于21题的加强版，但是如果单纯使用21题的每轮比较法，那么每轮只要要比较 k 次，而我们知道这其中肯定会存在很多重复的比较，所以我们可以使用二叉堆来保存每一轮的比较信息，而在C++中STL已经为我们实现了这种数据结构，那就是优先队列priority\_queue，直接调用即可。
+
+实现代码：
+
+```javascript
+// 23. Merge k Sorted Lists
+ListNode* mergeKLists(vector<ListNode*>& lists) {
+  ListNode *dump = new ListNode(0), *p = dump, *nowPoint;
+  // val, node
+  priority_queue<pair<int, ListNode*>, vector<pair<int, ListNode*>>, greater<pair<int, ListNode*>> > pQueue;
+  for (ListNode* node : lists) {
+    if (node != NULL)
+      pQueue.push({node->val, node});
+  }
+  while (!pQueue.empty()) {
+    nowPoint = pQueue.top().second;
+    p->next = nowPoint;
+    p = p->next;
+    pQueue.pop();
+    if (nowPoint->next != NULL) {
+      pQueue.push({nowPoint->next->val, nowPoint->next});
+    }
+  }
+  return dump->next;
+}
+```
+
+
+## 24. Swap Nodes in Pairs
+
+#### 解题思路：
+
+两两交换即可，这里每轮需要变换三个指向，第一个的next要指向第二个的next，第二个的next要指向第一个，前驱的next要指向第二个，每轮过后让 p 指向第一个即可。
+
+实现代码：
+
+```javascript
+// 24. Swap Nodes in Pairs
+ListNode* swapPairs(ListNode* head) {
+  ListNode *dump = new ListNode(0), *p = dump, *first, *second;
+  dump->next = head;
+  while (p != NULL && p->next != NULL && p->next->next != NULL) {
+    first = p->next;
+    second = p->next->next;
+    first->next = second->next;
+    second->next = first;
+    p->next = second;
+    p = first;
+  }
+  return dump->next; 
+}
+```
+
+
+
+## 25. Reverse Nodes in k-Group
+
+#### 解题思路：
+
+这题相当于24题的加强版，将24题中的2变成了k，换汤不换药，稍微复杂一点，所以建议把每一步的思路理清楚，不然很容易弄错，大的思路是先检查是否还剩下足够数量的结点；然后进行反向操作：反向操作分为三步，中间结点关系反向，头结点指向处理 和 尾结点指向处理；最后让 p 结点后挪即可。
+
+实现代码：
+
+```javascript
+// 25. Reverse Nodes in k-Group
+ListNode* reverseKGroup(ListNode* head, int k) {
+  if (k == 1) return head;
+  vector<ListNode*> nodeList;
+  ListNode *dump = new ListNode(0), *p = dump, *former, *latter, *nextLatter, *q;
+  dump->next = head;
+  while (true) {
+    // check count of left nodes
+    q = p;
+    for (int i = 0; i < k + 1; i++) {
+      if (q != NULL) {
+        q = q->next;
+      } else {
+        return dump->next;      
+      }
+    }
+    // deal with medial relations 
+    former = p->next;
+    latter = former->next;
+    for (int i = 0; i < k - 1; i++) {
+      // save latter->next as next latter
+      nextLatter = latter->next;
+      // latter->next = former
+      latter->next = former;
+      // save latter as next former  
+      former = latter;
+      latter = nextLatter;
+    }
+    // deal with head
+    q = p->next;
+    p->next = former;
+    // deal with tail
+    q->next = latter;
+
+    p = q;
+  }
+  return dump->next;      
+}
+```
+
+
+
+## 26. Remove Duplicates from Sorted Array
+
+#### 解题思路：
+
+按照题意，把数组中不重复出现的数字**保存在数组前端**即可。
+
+实现代码：
+
+```javascript
+// 26. Remove Duplicates from Sorted Array
+int removeDuplicates(vector<int>& nums) {
+  if (nums.size() == 0) return 0;
+  int j = 1;
+  for (int i = 1; i < nums.size(); i++) {
+    if (nums[i] != nums[i - 1]) {
+      nums[j++] = nums[i];
+    }
+  } 
+  return j;      
+}
+```
+
+
+
+## 27. Remove Element
+
+#### 解题思路：
+
+这道题和 26 题几乎没有区别，把判断条件稍微改变即可。
+
+实现代码：
+
+```javascript
+// 27. Remove Element
+int removeElement(vector<int>& nums, int val) {
+  int j = 0;
+  for (int i = 0; i < nums.size(); i++) {
+    if (nums[i] != val) {
+      nums[j++] = nums[i];
+    }
+  }
+  return j;
+}
+```
+
+### 28. Implement strStr\(\)
+
+#### 解题思路：
+
+字符串匹配算法，选择比较多，最容易的就是**暴力匹配**，高阶一点可以使用**KMP**，这里简单起见，采用暴力解法，嘻嘻。
+
+实现代码：
+
+```javascript
+// 28. Implement strStr()
+int strStr(string haystack, string needle) {
+  if (needle.size() == 0) return 0;
+  int hLen = haystack.size(), nLen = needle.size();
+  for (int i = 0; i < hLen; i++) {
+    if (hLen - i < nLen) {
+      return -1;
+    } else {
+      if (haystack.substr(i, nLen).compare(needle) == 0) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}
+```
+
+### 29. Devide Two Integers
+
+#### 解题思路：
+
+这道题如果用减法去实现会造成时间复杂度过高，从而导致时间溢出，所以这里采用**位运算法**，从 2 的 31 次方开始除，一直除到 2 的 0 次方，为了防止内存溢出，我们把结果和中间变量保存在 long 类型中的。
+
+实现代码：
+
+```javascript
+// 29. Divide Two Integers
+int divide(int dividend, int divisor) {
+  if (dividend > INT32_MAX || dividend < INT32_MIN || divisor > INT32_MAX || divisor < INT32_MIN) return INT32_MAX;
+  long son = abs((long)divisor), father = abs((long)dividend), res = 0, base = 1, sum = 0;
+  for (int i = 31; i >= 0; i--) {
+    if (sum + (son << i) <= father) {
+      sum += son << i;
+      res += base << i;
+    }
+  }
+  if ((dividend >= 0 && divisor > 0) || (dividend < 0 && divisor < 0)) {
+    return (res > INT32_MAX) ? INT32_MAX : res;
+  } else {
+    return (-res < INT32_MIN) ? INT32_MAX : -res;
+  }
+}
+```
+
+## 30. Substring with Concatenation of All Words
+
+#### 解题思路：
+
+使用**哈希表**存储 words 数组中各个单词的数量，然后使用暴力匹配即可。
+
+实现代码：
+
+```javascript
+// 30. Substring with Concatenation of All Words
+vector<int> findSubstring(string s, vector<string>& words) {
+  vector<int> result;
+  if (words.size() == 0 || words[0].size() == 0 || s.size() < words.size() * words[0].size()) {
+    return result;
+  }
+  unordered_map<string, int> counts;
+  for (string word : words) {
+    if (counts.find(word) == counts.end()) {
+      counts[word] = 1;
+    } else {
+      counts[word]++;
+    }
+  }
+  int wordCount = words.size(), wordLength = words[0].size(), strLength = s.size();
+  for (int i = 0; i <= strLength - wordLength * wordCount; i++) {
+    unordered_map<string, int> innerCounts = counts;
+    bool flag = true;
+    for (int j = 0; j < wordCount; j++) {
+      string nowStr = s.substr(i + j * wordLength, wordLength);
+      if (innerCounts.find(nowStr) == innerCounts.end() || innerCounts[nowStr] == 0) {
+        flag = false;
+        break;
+      } else {
+        innerCounts[nowStr]--;
+      }
+    }
+    if (flag) {
+      result.push_back(i);
+    }
+  }
+  return result;
+}
+```
