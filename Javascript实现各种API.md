@@ -4,7 +4,7 @@
 * [bind](#2-bind)
 * [new](#3-new)
 * [instanceof](#4-instanceof)
-* [Object.assign](#5-jsonparse)
+* [Object.assign](#5-objectassign)
 * [JSON.stringify](#6-jsonstringify)
 * [throttle 函数节流](#7-throttle-函数节流)
 * [debounce 函数防抖](#8-debounce-函数防抖)
