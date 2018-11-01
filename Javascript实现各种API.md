@@ -120,6 +120,44 @@ function instanceOf(L, R) {
 
 ## 5. Object.assign
 
+函数作用：浅拷贝一层对象
+
+实现思路：
+
+a. 将第一个参数之后的函数参数拷贝到第一个函数参数对象中
+
+b. 如果第一个参数不是对象，则将其转化成相应的包装对象
+
+```js
+function convertObj(obj) {
+    var objType = typeof obj
+    if (obj === undefined || obj === null) {
+        throw new Error('Can\'t convert')
+    } else if (objType === 'object') {
+        return obj
+    } else if (objType === 'string') {
+        return new String(obj)
+    } else if (objType === 'number') {
+        return new Number(obj)
+    } else if (objType === 'boolean') {
+        return new Boolean(obj)
+    } else {
+        return new Object(obj)
+    }
+}
+Object.myAssign = function () {
+    var obj = convertObj(arguments[0])
+    for (var i = 1; i < arguments.length; i++) {
+        for (var key in arguments[i]) {
+            if (arguments[i].hasOwnProperty(key)) {
+                obj[key] = arguments[i][key]
+            }
+        }
+    }
+    return obj
+}
+```
+
 ## 6. JSON.stringify
 
 函数作用：将对象转换成一个 json 格式的字符串保存起来
