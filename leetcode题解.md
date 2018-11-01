@@ -3,6 +3,31 @@
 * [3. Longest Substring Without Repeating Characters](#3-longest-substring-without-repeating-characters)
 * [4. Median of Two Sorted Arrays](#4-median-of-two-sorted-arrays)
 * [5. Longest Palindromic Substring](#5-longest-palindromic-substring)
+* [6. ZigZag Conversion](#6-zigzag-conversion)
+* [7. Reverse Integer](#7-reverse-integer)
+* [8. String to Integer \(atoi\)](#8-string-to-integer-atoi)
+* [9. Palindrome Number](#9-palindrome-number)
+* [10. Regular Expression Matching](#10-regular-expression-matching)
+* [11. Container With Most Water](#11-container-with-most-water)
+* [12. Integer To Roman](#12-integer-to-roman)
+* [13. Roman To Integer](#13-roman-to-integer)
+* [14. Longest Common Prefix](#14-longest-common-prefix)
+* [15. 3Sum](#15-3sum)
+* [16. 3Sum Closest](#16-3sum-closest)
+* [17. Letter Combinations of a Phone Number](#17-letter-combinations-of-a-phone-number)
+* [18. 4Sum](#18-4sum)
+* [19. Remove Nth Node From End of List](#19-remove-nth-node-from-end-of-list)
+* [20. Valid Parentheses](#20-valid-parentheses)
+* [21. Merge Two Sorted Lists](#21-merge-two-sorted-lists)
+* [22. Generate Parentheses](#22-generate-parentheses)
+* [23. Merge k Sorted Lists](#23-merge-k-sorted-lists)
+* [24. Swap Nodes in Pairs](#24-swap-nodes-in-pairs)
+* [25. Reverse Nodes in k-Group](#25-reverse-nodes-in-k-group)
+* [26. Remove Duplicates from Sorted Array](#26-remove-duplicates-from-sorted-array)
+* [27. Remove Element](#27-remove-element)
+* [28. Implement strStr\(\)](#28-implement-strstr)
+* [29. Devide Two Integers](#29-devide-two-integers)
+* [30. Substring with Concatenation of All Words](#30-substring-with-concatenation-of-all-words)
 
 ### 
 
@@ -814,7 +839,7 @@ int threeSumClosest(vector<int>& nums, int target) {
 }
 ```
 
-## 17. Letter Combinations of a Phone Numbe
+## 17. Letter Combinations of a Phone Number
 
 #### 解题思路：
 
